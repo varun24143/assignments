@@ -1,0 +1,60 @@
+# Markov Models
+
+These are real simple and intuitive, completely dependent on probabilities.
+
+## Markov Property
+
+P(weather(today)|weather(all previous days)) = P(weather(today)|weather(yesterday))
+
+Terminology
+When the current state P(s(t)|s(t-1)) is only dependent on the previous state, it is known as First Order Markov
+When the current state P(s(t)|s(t-1),s(t-2)), is dependent on previous 2 states, it is known as Second Order Markov
+When the current state P(s(t)|s(t-1),s(t-2),s(t-3)), is dependent on previous 3 states, it is known as Third Order Markov
+
+Lets start with a simple example
+Sick or Healthy
+
+. Model state of healthy vs having the cold or flu
+Very much like real life problem
+Take some data, build a max likelihood model
+Study properties that emerge from model
+make predictions from model
+generate next most likely state
+
+Lets assume :
+p(sick|healthy) - 0.005
+p(healthy|healthy) - 0.995
+p(sick|sick) - 0.8
+p(healthy|sick) - 0.2
+
+So, p(healthy 10 days in a row|healthy at t=0) = A^(t-1) = 0.995^9 = 95.6%
+So, p(healthy 100 days in a row|healthy at t=0) = A^(t-1) = 0.995^99 = 60.9%
+Lets caclulate, 
+p(sick 10 days in a row|sick at t=0) = A^(t-1) = 0.8^9 = 13.4%
+p(sick 5 days, then healthy 5 days|sick at t=0)= p(sick 5 days|sick at t=0) * p(healthy 5 days | sick at t=0)
+0.8^4 * 0.2*0.995^4 = 8% 
+p(alternate sick and healthy for 10 days | sick at t=0)
+SHSHSHSHSH = 0.2*0.005*0.2*0.005.... = 2e-13
+
+A Harder Problem -
+Expected number of days staying in the same state ? (e.g How many days would a person be sick given the model)
+Infinite sums
+p(s(t)=i|s(t-1)=i) = A(i,i)
+
+SEO and Bounce Rate Optimization -
+We want to increase conversions, increase traffic, avoid high bounce rate.
+
+    First -
+        How do poeple arrive at my page ? Home page ? Landing Page ?
+        This is just pi (the intial state distribution)
+        So once we have the markov model, then the pi, the initial state distribution will tell us that which pages the users are most likely to start on.
+    Sequence of Pages -
+        Landing Page -  buy button  - checkout - close browser
+        Check probability to confirm validity of the sequences.
+        Longer Sequence == more multiplication == smaller number
+        
+    Second Alternative -
+        Compare 2 sequences log probability - then actual value of probability doesnt matter
+        Consider just the state transitions (once I've added to the cart, what's the probability of checking out ?)
+
+
